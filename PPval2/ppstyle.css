@@ -1,0 +1,36 @@
+#main {
+font-family:sans-serif;
+margin:25px;
+padding:25px;
+}
+h1 {
+font-family:sans-serif;
+font-size:30px;
+color:black;
+}
+#msg {
+ font-size:12px;
+}
+
+button {
+ 
+font-family:lanto,sans-serif;
+font-size:18px;
+}
+#distrikt {
+font-family:sans-serif;
+font-size:20px;
+}
+#odistrikt {
+font-family:lanto,sans-serif;
+font-size:20pt;
+}
+
+
+
+td,table {
+ font-family:times;
+ font-size:10px;
+}
+
+}
