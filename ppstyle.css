@@ -1,0 +1,77 @@
+#main {
+font-family:sans-serif;
+margin:2px;
+padding:2px;
+
+#nav {
+ color:#512483;
+ font-size:7px;
+}
+
+#data {
+a:link, a:visited { 
+    color: black;
+    text-decoration: underline;
+    cursor: auto;
+}
+
+a:link:active, a:visited:active { 
+    color: grey;
+}
+}
+
+}
+#lokaler {
+    font-family:sans-serif;
+    font-size:18px;
+ td,table {
+ font-family:sans-serif;
+ font-size:18px;
+}
+h1 {
+font-family:sans-serif;
+font-size:30px;
+color:black;
+}
+#msg {
+ font-size:12px;
+ backgrund-color:green;
+}
+
+button {
+ 
+font-family:lanto,sans-serif;
+font-size:18px;
+}
+#distrikt {
+font-family:sans-serif;
+font-size:20px;
+}
+#odistrikt {
+font-family:lanto,sans-serif;
+font-size:20pt;
+}
+
+
+
+td,table {
+ font-family:times;
+ font-size:10px;
+}
+
+}
+a:link, a:visited { 
+    color: black;
+    text-decoration: none;
+    cursor: auto;
+}
+
+a:link:active, a:visited:active { 
+    color: grey;
+}
+
+a:link:hover, a:visited:hover { 
+    color: #512483;
+    Text-decoration:underline;
+}
+
