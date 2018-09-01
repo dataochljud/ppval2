@@ -1,14 +1,13 @@
 # ppval2
 Valsedeldistributionssystem
 
-Version 2.0.03
+Version 2.0.0.5
 
 TODO
 - Scipt för import av xml fil över vallokaler och röstlokaler
-- Indikator över status på lokaler sidan
 - Möjlighet att ändra dina uppgifter
 - Möjlighet att få lösenord återställt
-(v) Snygga utskrifter
-- Adminsida
+- Snygga utskrifter (delvis klart)
+- Adminsida *delvis påbörjad*
 - Statistiksida
-- Möjlighet att lista bokade lokaler på (Län, Kommun, Distrikt)
+- Möjlighet att lista bokade lokaler på (Län, Kommun, Distrikt) *påbörjad*
