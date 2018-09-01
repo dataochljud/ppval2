@@ -13,7 +13,7 @@ document.getElementByID("gmap").innerHTML =
 }
 
 </script>
-<div id="data">
+
 
 <?php 
 $servername = "johantibbelin.se.mysql";
@@ -32,23 +32,41 @@ $lan=$_GET["lan"];
 $k = $kommun;
 $l = $lan;
 ?><div id="lokalmeny">
-<p><a href="fget_lokaler_f.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>">[Visa endast förtidsröstningslokaler]</a><a href="fget_lokaler_v.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>">[Visa endast vallokaler]</a></p>
+<p><a href="fget_lokaler_f.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" style="backgroundcolor:#cccccc;">[Visa endast förtidsröstningslokaler]</a><a href="fget_lokaler_v.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>">[Visa endast valdagens lokaler]</a></p>
 </div>
+<div id="data">
 <?php
 //echo $kommun . ' ' . $lan . '<br>';
-$sql = "SELECT * FROM vallokal where KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan);
+$sql = "SELECT * FROM vallokal where KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan) . " order by Typ";
 //echo $sql . '<br>';
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
 $voters = 0;
+echo '<table><tr><td style="background-color:lightgrey;">Förtidsröstning</td><td style="bakground-color:white;">Vallokal (valdagen)</td></tr></table>';
+echo '<table id="lokaler">';
     while($row = $result->fetch_assoc()) {
 $voters = $voters +$row["VoterCountCalc"];
-        echo  '<a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a><br>'; 
+if ($row["Status"]=="K") {
+   echo '<tr><td style="background:green;">&nbsp;&nbsp;&nbsp;</td>';
+} 
+else if ($row["Status"]=="B") {
+   echo '<tr><td style="background:yellow;">&nbsp;&nbsp;&nbsp;</td>';
+} else {
+   echo '<tr><td style="background:red;">&nbsp;&nbsp;&nbsp;</td>';
+}
+	if ($row["Typ"] == "F") {
+	   //echo " Förtid ";
+	   $lok_color = "#cccccc";
+	} else {
+	   $lok_color = "white";
+	}
+       echo  '<td style="background-color:'. $lok_color . ';"><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td></tr>'; 
     }
 } else {
     echo "0 results";
 }
+echo '</table>';
 $r = 'select * from Kommun where KommunID=' . $k . ' AND länID=' . $l;  
 //echo $r . "<br>";
 $result = $conn->query($r);
@@ -67,6 +85,4 @@ $conn->close();
 
 ?>
 </div><!-- data -->
-</div><!-- main -->
-</body>
-</html>
+<?php require("footer.php"); ?>

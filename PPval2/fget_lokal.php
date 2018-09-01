@@ -21,7 +21,7 @@ $lokalkod=$_GET["lokal"];
 $sql = 'SELECT * FROM vallokal where LokalKod="' .  htmlspecialchars($lokalkod) . '"';
 //echo $sql . '<br>';
 $result = $conn->query($sql);
-if ($result->num_rows > 0) {
+If ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
 $lat = $row["Lat"];
@@ -66,6 +66,7 @@ if ($row["Typ"] == "F") {
 } else {
    echo '<h4>Vallokal</h4>'; 
 }
+$Status = $row["Status"];
 echo '<h2 style="Margin:0px; padding:0px;">' . $row["lokal"] . '</h2>';
 echo '<p>Adress: ' . $row["Adress2"] . '<br>postort: ' . $row["Postort"] . '</p>';
 echo '<h3>Valsedlar</h3>';
@@ -90,6 +91,12 @@ echo '<p>Antal röstande: ' . $row["VoterCount"];
 $sql2 = 'SELECT * FROM Booking where LokalID="' .  htmlspecialchars($lokalkod) . '"';
 //echo $sql2 . '<br>';
 $result = $conn->query($sql2);
+
+//echo $Status . "<br><br>";
+if ($Status == "K") {
+       echo '<div><h3  style="background:green;color:white;">Lokalen är klar</h3></div>'; 
+       $booked=TRUE;
+} else {
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -99,14 +106,19 @@ if ($result->num_rows > 0) {
 } else {
     echo '<h3 style="background:red;">lokalen är obokad</h3>';
 }
+}
 
 
 
-$conn->close();
 
 ?>
 <?php 
-if (!$booked) { echo '<p><a href="boka_lokal.php?lokalkod=' . $lokalkod .'">Boka den här vallokalen</a></p>'; } ?>
+if (!$booked) { echo '<p><a href="boka_lokal.php?lokalkod=' . $lokalkod .'">Boka den här vallokalen</a></p>'; 
+   } else {
+     echo 'Sätt lokalen som <a href="sklar.php?lokal=' . $lokalkod . '">Klar</a>.';
+} 
+$conn->close();
+?>
 
 <div class="gmap">
 <!--<p><button type="button" onclick="loadDoc()">Visa karta</button></p>-->
@@ -125,6 +137,4 @@ function loadDoc() {
 }
 </script>
 <p><a href="<?php echo $murl; ?>">Visa karta</a></p>
-</div>
-</body>
-</html>
+<?php require("footer.php"); ?>

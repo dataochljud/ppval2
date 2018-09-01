@@ -1,5 +1,9 @@
 <?php $lkod = $_GET["lokalkod"];
 //echo $lkod . "<br>";
+$elk = explode('_',$lkod);
+$lk = $lkod;
+$lan = $elk[0];
+$kommun = $elk[1];
 $namn = $_GET["namn"];
 $efternamn = $_GET["efternamn"];
 $adress = $_GET["adress"];
@@ -53,8 +57,16 @@ $booking = 'INSERT into Booking ( userID, LokalID) values(' . $res . ',"' .  $lk
 $result = $conn->query($booking);
 //echo $booking . "<br>";
 //echo $result . "<br>";
+
+//Uppdatera lokalstatus
+$uls ='UPDATE vallokal SET status ="B" WHERE lokalkod="' . $lk . '"';
+//echo $lk . "<br>";
+$re = $conn->query($uls);
 $conn->close();
 //echo "Sparar kaka.";
 setcookie("PPval2user", $res , time() + ( 86400 * 30), "/"); //Spara kaka 30 dagar
-?>
-<?php require("index.php") ?>
+
+//echo $lan . " " . $kommun . "<br>";
+header('Location: https://www.johantibbelin.se/ppval2/fget_lokaler.php?lan=' . $lan . '&kommun=' . $kommun);
+exit();
+ ?>

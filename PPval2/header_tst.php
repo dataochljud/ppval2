@@ -15,15 +15,19 @@
 </head>
 <body> 
 <div id="main">
-<a href="index.php"><img src="PP_val2_logga.png" alt="Piratpartiet Valsedelsdistribution 2.0" width="300px" /></a>
-<div class="msg"><br>Version: 2.0.0.5</div>
+<a href="index.php"><img src="PP_val2_logga.png" alt="Piratpartiet Valsedelsdistribution 2.0" width="400px" /></a>
+<div class="msg"><br>Version: 2.0.0.4</div>
 <div id="menu">
 <?php
 if(isset($_COOKIE["PPval2user"])) {
-echo '<p><a href="mina_lokaler2.php">Mina lokaler</a></p>';
+echo '<p><a href="mina_lokaler2.php">[Mina lokaler]</a>';
 } else {
 echo '<a href="login.php" style="font-size:11px;align:right;">[Logga in]</a>';
 }
 ?>
 
 </div><!-- Menu -->
+<div id="nav">
+<?php echo "Page:" ?>
+<a href="/ppval2/">Distrikt</a>
+</div>

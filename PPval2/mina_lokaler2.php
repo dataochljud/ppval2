@@ -95,3 +95,4 @@ function onSub() {
 }
 }
 ?>
+<?php require("footer.php"); ?>

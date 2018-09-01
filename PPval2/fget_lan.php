@@ -41,4 +41,5 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 echo "</select>";
+require("footer.php");
 ?>

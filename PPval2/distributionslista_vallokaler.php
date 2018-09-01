@@ -51,3 +51,4 @@ $conn->close();
 
 
 ?>
+<?php require("footer.php"); ?>

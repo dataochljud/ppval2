@@ -30,7 +30,7 @@ if ($result->num_rows > 0) {
 	$sql = 'SELECT * 
 	FROM  `Booking` 
 	JOIN vallokal ON vallokal.lokalkod = Booking.lokalid
-	WHERE userid =' . $uid . ' and typ="F"';
+	WHERE userid =' . $uid . ' and typ="F" and vallokal.LanKod != 1';
 	//echo $sql . "<br>";
         $res2 = $conn->query($sql);
 	if ($res2->num_rows > 0) {
@@ -51,3 +51,4 @@ $conn->close();
 
 
 ?>
+<?php require("footer.php"); ?>

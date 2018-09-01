@@ -40,6 +40,6 @@ xhttp.open("GET", "get_lan.php?distrikt="+str, true);
 xhttp.send();
 }
 </script>
-</div><!-- Main -->
-</body>
-</html>
+<?php require("footer.php"); ?>
+
+
