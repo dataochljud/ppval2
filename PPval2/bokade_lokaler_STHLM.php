@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
 	$userb = $conn->query($bokad_av_sql);
 	if ($userb->num_rows > 0) {
 	$userrow = $userb->fetch_assoc();
-	$bokad_av = '<td><!-- <a href="list_user.php?userid=' . $userrow["UserID"] . '">-->' . $userrow["namn"] . " " . $userrow["efternamn"] . '<!--</a>--></td>';
+	$bokad_av = '<td><a href="lista_anv.php?anv=' . $userrow["UserID"] . '">' . $userrow["namn"] . " " . $userrow["efternamn"] . '</a></td>';
 	} else { $bokad_av = '<td style="background-color:red;color:white;">Obokad</td>';}
 	echo '<tr><td>' . $row["Namn"] . '</td><td>' . $row["LokalKod"] .'</td><td>' . $row["Typ"] .'</td><td>' . $row["lokal"] .'</td><td>' . $row["Adress1"] . '</td><td>' . $row["Postort"] . $bokad_av . "<tr> "; 
 	
