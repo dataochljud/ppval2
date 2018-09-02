@@ -14,32 +14,32 @@ document.getElementByID("gmap").innerHTML =
 
 </script>
 <div id="data">
-<h2>Distrikt</h2>
-<a href="fget_lan.php?distrikt=5">Norra distriktet</a><br>
-<a href="fget_lan.php?distrikt=1">Södra distriktet</a><br>
-<a href="fget_lan.php?distrikt=4">Stockholmsdistriktet</a><br>
-<a href="fget_lan.php?distrikt=2">Västra distriktet</a><br>
-<a href="fget_lan.php?distrikt=3">Östra distriktet</a><br>
-</div><!-- data -->
 
-<script>
-function updateData(str) {
-var xhttp;
-if (str == "") {
-document.getElementById("data").innerHTML = "";
-return;
-}
-xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-  document.getElementById("data").innerHTML = this.responseText;
-}
-};
-echo str;
-xhttp.open("GET", "get_lan.php?distrikt="+str, true);
-xhttp.send();
-}
-</script>
-<?php require("footer.php"); ?>
+<?php 
+$servername = "johantibbelin.se.mysql";
+$username = "johantibbelin_se_ppval";
+$password = "ppval2018";
+$dbname = "johantibbelin_se_ppval";
 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
 
+$sql = "SELECT * FROM Län order by namn";
+// echo $sql . '<br>';
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo  '<a href="fget_kommuner.php?lan=' . $row["LänID"] . '">' . $row["Namn"] . '</a><br>'; 
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+echo "</select>";
+require("footer.php");
+?>
