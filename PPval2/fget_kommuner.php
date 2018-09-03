@@ -15,9 +15,9 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Startsida</a></li>
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
+        $servername = "johantibbelin.se.mysql";
+        $username = "johantibbelin_se_ppval";
+        $password = "ppval2018";
         $dbname = "johantibbelin_se_ppval";
 
         // Create connection

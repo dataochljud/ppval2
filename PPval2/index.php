@@ -31,9 +31,9 @@ function showMap() {
     <p>Om du inser att du ej kan leverera till en eller flera lokaler du bokat, var vänlig avboka dessa så fort som möjligt, så att andra förhoppningsvis ser detta och kan ställa upp.</p>
 
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
+    $servername = "johantibbelin.se.mysql";
+    $username = "johantibbelin_se_ppval";
+    $password = "ppval2018";
     $dbname = "johantibbelin_se_ppval";
 
     // Create connection
