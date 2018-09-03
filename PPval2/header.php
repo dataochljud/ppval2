@@ -1,3 +1,4 @@
+<?php require("mobile_detect.php"); ?>
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -19,7 +20,7 @@
   <div id="wrapper" class="container-fluid">
     <header class="row">
       <div class="col-md-8 offset-md-2">
-        <a href="index.php"><img src="assets/icons/pirat-logga.png" alt="Piratpartiets logga"></a>
+        <a href="index.php"><img src="assets/icons/pirat-logga.png" alt="Piratpartiets logga" <? if ($mobile_browser) { echo ' width="300"';} ?>></a>
       </div>
 
       <?php
