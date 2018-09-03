@@ -11,3 +11,4 @@ TODO
 - Adminsida *delvis påbörjad*
 - Statistiksida
 - Möjlighet att lista bokade lokaler på (Län, Kommun, Distrikt) *påbörjad*
+- Möjlighet att avboka lokaler
