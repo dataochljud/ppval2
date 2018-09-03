@@ -17,3 +17,9 @@ UI
 
 
 -mobilanpassning av logga
+
+Övrigt
+
+-ta bort ej använda filer
+-W3C validate html
+-refactoring av kod (inte brotom)
