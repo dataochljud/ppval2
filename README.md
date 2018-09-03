@@ -12,3 +12,5 @@ TODO
 - Statistiksida
 - Möjlighet att lista bokade lokaler på (Län, Kommun, Distrikt) *påbörjad*
 - Möjlighet att avboka lokaler
+UI
+-mobilanpassning av logga
