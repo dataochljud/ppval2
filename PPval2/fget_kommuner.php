@@ -13,7 +13,7 @@
   <div class="col-md-8 offset-md-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/ppval2">Startsida</a></li>
+        <li class="breadcrumb-item"><a href="/ppval2/">Startsida</a></li>
         <?php
         $servername = "johantibbelin.se.mysql";
         $username = "johantibbelin_se_ppval";
