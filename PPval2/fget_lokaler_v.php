@@ -2,87 +2,99 @@
 
 <div class="gmap">
 </div>
+
 <script>
-
-
 function showMap() {
-document.getElementByID("gmap").innerHTML =
-"
-<h1>Katan kommer vara här...</h1>
-";
+    document.getElementByID("gmap").innerHTML = "<h1>Katan kommer vara här...</h1>";
 }
-
 </script>
 
+<div class="row">
+  <div class="col-md-8 offset-md-2">
 
-<?php 
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Startsida</a></li>
+        <?php
+        $servername = "johantibbelin.se.mysql";
+        $username = "johantibbelin_se_ppval";
+        $password = "ppval2018";
+        $dbname = "johantibbelin_se_ppval";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-$kommun=$_GET["kommun"];
-$lan=$_GET["lan"];
-$k = $kommun;
-$l = $lan;
-?><div id="lokalmeny">
-<p><a href="fget_lokaler_f.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" style="backgroundcolor:#cccccc;">[Visa endast förtidsröstningslokaler]</a><a href="fget_lokaler_v.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>">[Visa endast valdagens lokaler]</a></p>
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $lan = $_GET["lan"];
+        $kommun = $_GET["kommun"];
+
+        $result = $conn->query("SELECT * FROM Län WHERE LänID=" . htmlspecialchars($lan));
+        echo '<li class="breadcrumb-item"><a href="fget_kommuner.php?lan=' . $lan . '">' . $result->fetch_assoc()["Namn"] . '</a></li>';
+
+        $result = $conn->query("SELECT * FROM Kommun WHERE KommunID=" . htmlspecialchars($kommun) . " AND LänID=" . htmlspecialchars($lan));
+        $kommun_namn = $result->fetch_assoc()["Namn"];
+        echo '<li class="breadcrumb-item active" aria-current="page">' . $kommun_namn . '</li>';
+        ?>
+      </ol>
+    </nav>
+  </div>
 </div>
-<div id="data">
-<?php
-//echo $kommun . ' ' . $lan . '<br>';
-$sql = "SELECT * FROM vallokal where KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan) . ' AND Typ="V"' . " order by Typ";
-//echo $sql . '<br>';
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    // output data of each row
-$voters = 0;
-echo '<table><tr><td style="background-color:lightgrey;">Förtidsröstning</td><td style="bakground-color:white;">Vallokal (valdagen)</td></tr></table>';
-echo '<table id="lokaler">';
-    while($row = $result->fetch_assoc()) {
-$voters = $voters +$row["VoterCountCalc"];
-if ($row["Status"]=="K") {
-   echo '<tr><td style="background:green;">&nbsp;&nbsp;&nbsp;</td>';
-} 
-else if ($row["Status"]=="B") {
-   echo '<tr><td style="background:yellow;">&nbsp;&nbsp;&nbsp;</td>';
-} else {
-   echo '<tr><td style="background:red;">&nbsp;&nbsp;&nbsp;</td>';
-}
-	if ($row["Typ"] == "F") {
-	   //echo " Förtid ";
-	   $lok_color = "#cccccc";
-	} else {
-	   $lok_color = "white";
-	}
-       echo  '<td style="background-color:'. $lok_color . ';"><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td></tr>'; 
-    }
-} else {
-    echo "0 results";
-}
-echo '</table>';
-$r = 'select * from Kommun where KommunID=' . $k . ' AND länID=' . $l;  
-//echo $r . "<br>";
-$result = $conn->query($r);
-if ($result->num_rows > 0) {
-    // output data of each row
-//$voters = 0;
-    while($row = $result->fetch_assoc()) {
-$rb = $row["Röstb"];
-     echo "<p>Antal röstande i kommunen: " . $rb . "</p>";
-    }
-} else {
-    echo "0 results";
-}
 
-$conn->close();
+<div class="row">
+  <div class="col-md-8 offset-md-2">
 
-?>
-</div><!-- data -->
+    <?php
+    $result = $conn->query('SELECT * from Kommun WHERE KommunID=' . $kommun . ' AND länID=' . $lan);
+    echo '<p>' . $kommun_namn . ' har cirka ' . $result->fetch_assoc()["Röstb"] . ' röstberättigade.</p>'
+    ?>
+
+    <ul id="filter">
+      <li><a href="fget_lokaler_f.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" role="button">Visa endast förtidsröstningslokaler <i class="fas fa-filter"></i></a></li> |
+      <li><a href="fget_lokaler_v.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" role="button">&nbsp;&nbsp;Visa endast valdagens lokaler <i class="fas fa-filter"></i></a></li>
+    </ul>
+  </div>
+</div>
+
+<main class="row">
+  <div class="col-md-8 offset-md-2">
+
+    <?php
+    //echo $sql . '<br>';
+    $result = $conn->query("SELECT * FROM vallokal WHERE KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan). " AND Typ='V'" . " order by Typ");
+    if ($result->num_rows > 0) {
+        echo '<table class="table table-bordered table-hover">';
+        echo '<thead><tr><th>Status <i class="fas fa-clipboard-check"></i></th><th>Förtidsröstning <i class="fas fa-clock"></i></th><th>Namn på lokal <i class="fas fa-tag"></i></th></tr></thead><tbody>';
+
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+
+            if ($row["Status"]=="K") {
+                echo '<tr><td class="table-success">Klar</td>';
+            } else if ($row["Status"]=="B") {
+                echo '<tr><td class="table-warning">Bokad</td>';
+            } else {
+                echo '<tr><td class="table-danger">Ej bokad</td>';
+            }
+            if ($row["Typ"] == "F") {
+                //echo " Förtid ";
+                echo '<td class="table-primary">Ja</td>';
+            } else {
+                echo '<td>Nej</td>';
+            }
+            echo  '<td><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td></tr>';
+        }
+        echo '</tbody></table>';
+    } else {
+        echo '<div class="alert alert-warning" role="alert">Vi hittade tyvärr inga lokaler i vår databas. Vänligen kontakta ansvarig.</div>';
+    }
+
+    $conn->close();
+    ?>
+
+  </div>
+</main>
+
 <?php require("footer.php"); ?>

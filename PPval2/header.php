@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" /> 
-<link rel="stylesheet" href="ppstyle.css">
-<script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.3.2.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title>Piratpartiet: valsedelsdistribution</title>
 
-<title>Piratpartiet: valsedelsdistribution 2.0</title>
-  <meta name="description" content="PP valsedelssystem 2.0">
-  <meta name="keywords" content="HTML,CSS,XML,JavaScriptPiratpartiet, valsedlar, system">
+  <meta name="description" content="PP valsedelssystem">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript,Piratpartiet,valsedlar,system">
   <meta name="author" content="Johan Roos Tibbelin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body> 
-<div id="main">
-<a href="index.php"><img src="PP_val2_logga.png" alt="Piratpartiet Valsedelsdistribution 2.0" width="300px" /></a>
-<div class="msg"><br>Version: 2.0.0.5</div>
-<div id="menu">
-<?php
-if(isset($_COOKIE["PPval2user"])) {
-echo '<p><a href="mina_lokaler2.php">Mina lokaler</a></p>';
-} else {
-echo '<a href="login.php" style="font-size:11px;align:right;">[Logga in]</a>';
-}
-?>
 
-</div><!-- Menu -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
+</head>
+<body>
+  <div id="wrapper" class="container-fluid">
+    <header class="row">
+      <div class="col-md-8 offset-md-2">
+        <a href="index.php"><img src="assets/icons/pirat-logga.png" alt="Piratpartiets logga"></a>
+      </div>
+
+      <?php
+        if(isset($_COOKIE["PPval2user"])) {
+          echo '<p><a href="mina_lokaler2.php">Mina lokaler</a></p>';
+        } else {
+          echo '<a href="login.php" style="font-size:11px;align:right;">[Logga in]</a>';
+        }
+        ?>
+    </header>

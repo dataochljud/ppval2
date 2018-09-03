@@ -1,0 +1,16 @@
+header > div {
+    padding-top: 40px;
+}
+
+footer {
+    padding-bottom: 70px;
+}
+
+#filter {
+    padding: 0;
+}
+
+#filter li {
+    display: inline;
+    margin-right: 5px;
+}
