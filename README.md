@@ -14,8 +14,6 @@
 * När man fyller i uppgifter behövs det stå om fält är obligatoriska, och visa fel om det blir fel.
 * Just nu verkar det som om man behöver fylla i uppgifter varenda gång man vill boka en lokal. Hur fungerar inloggningen?
 
-* Man ska kunna se om man klickat på en länk (lila färg). Varför ser man inte det nu?
-
 * En ruta för att kunna markera att man ej vill ha sedlar hemskickade.
 * Fält för postnummer så att man kan sortera på personer som bor nära varandra. Här skulle man behöva uppdatera hela databasen manuellt.
 * Ett fält för kommentarer i formuläret.
