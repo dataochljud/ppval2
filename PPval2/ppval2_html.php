@@ -7,7 +7,7 @@
 //  DVS knappt fungerande :-P
 // Skrivet av Johan Roos Tibbelin (johan.roos.tibbelin@piratpartiet.se)
 // www.johantibbelin.se ---->
-<!---- 
+<!----
 ***************************************************
 ** TODO: AJAX:
 ** - Visa dölj karta
@@ -25,7 +25,7 @@
 **    v för Södra distriktet
 **    v Resten av landet
 ***************************************************
-**  Not: 
+**  Not:
 ***************************************************
 ** Senast ändrad: 2018-08-15 08:22
 ***************************************************
@@ -36,7 +36,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-$('#series option').click(function() { 
+$('#series option').click(function() {
 var value= $(this).attr('value');
 alert(value);
 })
@@ -95,18 +95,8 @@ font-size:20pt;
 </select>
 </div><!-- Distrikt -->
 <div id="lan">
-<?php 
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+<?php
+require("open_database.php");
 
 $sql = "SELECT * FROM Län";
 $result = $conn->query($sql);
@@ -114,7 +104,7 @@ echo "<select>";
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        ?><option value="<?php echo  $row["LänId"]; ?>"><?php echo $row["Namn"];?></option><?php 
+        ?><option value="<?php echo  $row["LänId"]; ?>"><?php echo $row["Namn"];?></option><?php
     }
 } else {
     echo "0 results";
@@ -125,7 +115,7 @@ $conn->close();
 </div>
 <div id="kommun">
 <select>
-<?php 
+<?php
 $servername = "johantibbelin.se.mysql";
 $username = "johantibbelin_se_ppval";
 $password = "ppval2018";
@@ -136,7 +126,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
 $sql = "SELECT * FROM Kommun WHERE LänId=8";
 $result = $conn->query($sql);
@@ -162,7 +152,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
 $sql = "SELECT * FROM lokal";
 $result = $conn->query($sql);

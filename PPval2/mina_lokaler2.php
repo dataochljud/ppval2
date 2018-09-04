@@ -1,6 +1,6 @@
 <?php require("header.php") ?>
 
-<?Php $lokalkod=$_GET["lokalkod"]; 
+<?Php $lokalkod=$_GET["lokalkod"];
 if(!isset($_COOKIE["PPval2user"])) {
 //    Echo "Cookie named PPval2user is not set!";
 } else {
@@ -10,18 +10,9 @@ if(!isset($_COOKIE["PPval2user"])) {
 }
 
 // Get user info
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
-$uid = $_COOKIE["PPval2user"];
+require("open_database.php");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+$uid = $_COOKIE["PPval2user"];
 
 $sql = 'SELECT * FROM User where userid=' . $_COOKIE["PPval2user"];
 //echo $sql . '<br>';
@@ -56,7 +47,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
 $sql = 'SELECT *
 FROM Booking
@@ -91,7 +82,7 @@ function onSub() {
    if(isset($_POST['submit'])) {
    echo $_POST["mail"];
    echo $_POST["namn"] . " " . $_POST["efternamn"];
-   
+
 }
 }
 ?>

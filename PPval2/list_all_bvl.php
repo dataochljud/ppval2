@@ -6,7 +6,7 @@
 //  DVS knappt fungerande :-P
 // Skrivet av Johan Roos Tibbelin (johan.roos.tibbelin@piratpartiet.se)
 // www.johantibbelin.se ---->
-<!---- 
+<!----
 ***************************************************
 ** TODO: AJAX:
 ** - Visa dölj karta
@@ -24,7 +24,7 @@
 **    - för Södra distriktet
 **    - Resten av landet
 ***************************************************
-**  Not: 
+**  Not:
 ***************************************************
 ** Senast ändrad: 2018-08-13 16:05
 ***************************************************
@@ -44,8 +44,8 @@ a {
 color:#000000;
 }
 #map {
-        height: 500px; /* Kartstorlek 500 x 500 pixlar (lagon för de flesta telefoner */  
-        width: 500px; 
+        height: 500px; /* Kartstorlek 500 x 500 pixlar (lagon för de flesta telefoner */
+        width: 500px;
        }
 </style>
 <title>Piratpartiet: valsedelsdistribution 2.0 - lista alla bokade lokaler</title>
@@ -63,17 +63,7 @@ color:#000000;
 <a href="list_all_obvl.php">Lista alla obokade lokaler</a></p>
 <hr>
 <?php
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+require("open_database.php");
 
 $sql = "SELECT * FROM lokal";
 $result = $conn->query($sql);

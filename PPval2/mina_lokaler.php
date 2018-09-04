@@ -9,7 +9,7 @@
   <meta name="author" content="Johan Roos Tibbelin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body> 
+<body>
 <div id="main">
 <img src="PP_val2_logga.png" alt="Piratpartiet Valsedelsdistribution 2.0" />
 <div class="msg"><p>Version: 2.0.0.01a</div>
@@ -19,17 +19,8 @@
 
 
 <?php
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
+require("open_database.php");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 $lokalkod=$_GET["lokal"];
 
 //echo $kommun . ' ' . $lan . '<br>';
@@ -54,7 +45,7 @@ echo $murl . '<br>';
 
 <div id="data">
 
-<?php 
+<?php
 $servername = "johantibbelin.se.mysql";
 $username = "johantibbelin_se_ppval";
 $password = "ppval2018";
@@ -65,7 +56,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 $lokalkod=$_GET["lokal"];
 
 //echo $kommun . ' ' . $lan . '<br>';

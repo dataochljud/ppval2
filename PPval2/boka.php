@@ -9,7 +9,7 @@
   <meta name="author" content="Johan Roos Tibbelin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body> 
+<body>
 <div id="main">
 <img src="PP_val2_logga.png" width="400px" alt="Piratpartiet Valsedelsdistribution 2.0" />
 <div class="msg"><p>Version: 2.0.0.01a</div>
@@ -25,18 +25,8 @@ $postadress = $_GET["postadress"];
 $mobil = $_GET["mobil"];
 $mail = $_GET["mail"];
 
+require("open_database.php");
 
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 $lokalkod=$_GET["lokal"];
 
 //echo $kommun . ' ' . $lan . '<br>';

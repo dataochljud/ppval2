@@ -31,17 +31,7 @@ function showMap() {
     <p>Om du inser att du ej kan leverera till en eller flera lokaler du bokat, var vänlig avboka dessa så fort som möjligt, så att andra förhoppningsvis ser detta och kan ställa upp.</p>
 
     <?php
-    $servername = "johantibbelin.se.mysql";
-    $username = "johantibbelin_se_ppval";
-    $password = "ppval2018";
-    $dbname = "johantibbelin_se_ppval";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    require("open_database.php");
 
     $result = $conn->query("SELECT * FROM Län order by namn");
     if ($result->num_rows > 0) {
