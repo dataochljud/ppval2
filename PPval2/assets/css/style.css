@@ -14,3 +14,7 @@ footer {
     display: inline;
     margin-right: 5px;
 }
+
+a:visited {
+    color: #551a8b;
+}
