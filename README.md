@@ -18,7 +18,6 @@
 * Fält för postnummer så att man kan sortera på personer som bor nära varandra. Här skulle man behöva uppdatera hela databasen manuellt.
 * Ett fält för kommentarer i formuläret.
 
-* Klickar man på "klar" hamnar man högst upp i strukturen.
 * Vid bokning är det viktigt att man kommer tillbaka till listan man var vid, så att man kan fortsätta boka.
 
 
