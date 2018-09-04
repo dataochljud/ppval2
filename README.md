@@ -24,6 +24,7 @@
 ## Medel prioritet
 
 * Avbokning av lokaler.
+* När man är inloggad ska man kunna se vilka lokaler man själv har bokat.
 
 * Spalten "förtidsröstning" behöver ändras till "typ av lokal". "förtidsröstning" samt "valdagslokal", eller båda.
 * Vissa lokaler är öppna både för förtid, samt under valdagen, hur vet man vilka som är det? Markera tydligt.
