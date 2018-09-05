@@ -33,8 +33,8 @@ $mail = $row["mail"];
 
 
 ?>
-<h2><?php echo $namn . " " . $efternamn ?></h2>
-<p>Lokaler:</p>
+<p/><h2><?php echo $namn . " " . $efternamn ?></h2>
+<p/>
 <?php
 $servername = "johantibbelin.se.mysql";
 $username = "johantibbelin_se_ppval";
@@ -57,7 +57,7 @@ WHERE Booking.userid =' . $uid;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
-echo '<div id="lokaltable"><table border="4px">';
+echo '<div id="lokaltable"><table class="table table-bordered table-hover">';
 echo '<tr><td>Lokal</td><td>Adress1</td><td>Adress2</td><td>Postort</td><td>Tider</td></tr>';
     while($row = $result->fetch_assoc()) {
   echo '<tr><td>' . $row["lokal"] . '</td><td>' . $row["Adress1"] . '</td><td>' . $row["Adress2"] . '</td><td>' . $row["Postort"] . '</td><td>' . $row["Tider"] . '</td></tr>';

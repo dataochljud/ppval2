@@ -11,12 +11,14 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
     	       $res = $row["UserID"];
     }
+
 } else {
     echo '<p style="font-size:14px;background:red;">Mailadressen finns ej i systemet<br>';
     echo "När du bokar dig på en lokal så skapas ditt konto automatiskt. <br>";
-    $have_mail = TRUE;
+    $have_mail = FALSE;
 }
 if ($have_mail) {setcookie("PPval2user", $res , time() + ( 86400 * 30), "/"); //Spara kaka 30 dagar
 } else { }
-require('index.php');
+header('Location: https://www.johantibbelin.se/ppval2/');
+exit();
 ?>

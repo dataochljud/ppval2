@@ -12,8 +12,8 @@ $user_id = $_GET["anv"];
    $sql = 'SELECT * FROM User WHERE UserID =' . $user_id;
 
 
-Echo '<h1>Bokade vallokaler - Användare</h1>';
-echo '<table border=4 style="font-size:15px;">';
+Echo '<p/><h1>Bokade vallokaler - Användare</h1>';
+echo '<table class="table table-bordered table-hover">';
 echo '<tr><td>Namn</td><td>Adress</td><td>Postadress</td><td>Telefon</td><td>mail</td></tr>'; 
 $result = $conn->query($sql);
 $first_row=TRUE;
@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
 }
 echo '</table>
       <h2>Bokade lokaler</h2>
-<table border="4">';
+<table class="table table-bordered table-hover">';
 
 $sql2 = 'SELECT * FROM Booking JOIN vallokal ON LokalKod = LokalID Where UserID =' . $user_id;
 
