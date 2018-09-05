@@ -19,6 +19,6 @@ if ($result->num_rows > 0) {
 }
 if ($have_mail) {setcookie("PPval2user", $res , time() + ( 86400 * 30), "/"); //Spara kaka 30 dagar
 } else { }
-header('Location: https://www.johantibbelin.se/ppval2/');
+header('Location: /ppval2/');
 exit();
 ?>
