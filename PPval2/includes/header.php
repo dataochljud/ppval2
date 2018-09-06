@@ -17,17 +17,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
 </head>
 <body>
-  <div id="wrapper" class="container-fluid">
-    <header class="row">
-      <div class="col-md-8 offset-md-2">
-        <a href="index.php"><img src="assets/icons/pirat-logga.png" alt="Piratpartiets logga" <? if ($mobile_browser) { echo ' width="300"';} ?>></a>
-      </div>
-
-      <?php
-        if(isset($_COOKIE["PPval2user"])) {
-          echo '<p><a href="mina_lokaler2.php">Mina lokaler</a></p>';
-        } else {
-          echo '<a href="login.php" style="font-size:11px;align:right;">[Logga in]</a>';
-        }
-        ?>
-    </header>
+<div id="wrapper" class="container-fluid">
+  <header class="row">
+    <div class="col-md-8 offset-md-2">
+      <a href="index.php"><img src="assets/icons/pirat-logga.png" alt="Piratpartiets logga" <? if ($mobile_browser) { echo ' width="300"';} ?>></a>
+    </div>
+  </header>

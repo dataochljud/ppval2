@@ -17,7 +17,7 @@ document.getElementByID("gmap").innerHTML =
 <h2>Admin</h2>
 
 <a href="../distributionslista_vallokaler.php">Distributionslista - vallokaler</a><br>
-<a href="distributionslista_fortidslokaler.php">Distributionslista - Förtidsröstning</a>
+<a href="../distributionslista_fortidslokaler.php">Distributionslista - Förtidsröstning</a>
 </div><!-- data -->
 
 <script>

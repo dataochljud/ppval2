@@ -1,109 +1,73 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="ppstyle.css">
-<title>Piratpartiet: valsedelsdistribution 2.0</title>
-  <meta name="description" content="PP valsedelssystem 2.0">
-  <meta name="keywords" content="HTML,CSS,XML,JavaScriptPiratpartiet, valsedlar, system">
-  <meta name="author" content="Johan Roos Tibbelin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body> 
-<div id="main">
-<img src="PP_val2_logga.png" alt="Piratpartiet Valsedelsdistribution 2.0" />
-<div class="msg"><p>Version: 2.0.0.01a</div>
-<div id="menu">
-
-</div><!-- Menu -->
-
+<?php require("includes/header.php") ?>
 
 <?php
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
+require("includes/open_database.php");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-$lokalkod=$_GET["lokal"];
+$userid = $_COOKIE["PPval2user"];
 
-//echo $kommun . ' ' . $lan . '<br>';
-$sql = 'SELECT * FROM vallokal where LokalKod="' .  htmlspecialchars($lokalkod) . '"';
-//echo $sql . '<br>';
-$result = $conn->query($sql);
+$result = $conn->query('SELECT * FROM User where userid=' . $userid);
+
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-$lat = $row["Lat"];
-$long = $row["Lng"];
+      $namn = $row["namn"];
+      $efternamn = $row["efternamn"];
+      $adress = $row["adress"];
+      $postadress = $row["postadress"];
+      $mob = $row["telefon"];
+      $mail = $row["mail"];
     }
-} else {
-    echo "0 results";
 }
-$conn->close();
-
-$murl = "gmap_lokal.php?lat=" . $lat . "&long=" . $long;
-echo $murl . '<br>';
-
 ?>
 
-<div id="data">
-
-<?php 
-$servername = "johantibbelin.se.mysql";
-$username = "johantibbelin_se_ppval";
-$password = "ppval2018";
-$dbname = "johantibbelin_se_ppval";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-$lokalkod=$_GET["lokal"];
-
-//echo $kommun . ' ' . $lan . '<br>';
-$sql = 'SELECT * FROM vallokal where LokalKod="' .  htmlspecialchars($lokalkod) . '"';
-//echo $sql . '<br>';
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-echo '<h2>' . $row["Lokal"] . '</h2>';
-echo '<p>Adress: ' . $row["Adress2"] . '<br>postort: ' . $row["Postort"] . '</p>';
-echo '<p>Öppettider: ' .$row["Tider"] . '</p><p>Status: ' . $row["Status"];
-    }
-} else {
-    echo "0 results";
-}
-$conn->close();
-
-?>
-<p><a href="boka_lokal.php?lokalkod=<?php echo $lokalkod; ?>">Boka den här vallokalen</a></p>
-
-<div class="gmap">
-<!--<p><button type="button" onclick="loadDoc()">Visa karta</button></p>-->
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.php">Startsida</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Mina lokaler</li>
+      </ol>
+    </nav>
+  </div>
 </div>
-<script>
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("gmap").innerHTML =
-      this.responseText;
-    }
-  };
-  xhttp.open("GET", <?php echo $murl; ?>, true);
-  xhttp.send();
-}
-</script>
-<p><a href="<?php echo $murl; ?>">Visa karta</a></p>
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h2>Mina lokaler</h2>
+
+    <p>Du har anmält dig till att dela ut valsedlar på följande lokaler:</p>
+  </div>
 </div>
-</body>
-</html>
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <?php
+    $result = $conn->query('SELECT * FROM Booking JOIN vallokal ON Booking.lokalid = vallokal.lokalkod WHERE Booking.userid =' . $userid);
+
+    if ($result->num_rows > 0) {
+        echo '<table class="table table-bordered table-hover">';
+        echo '<thead><tr><th>Status <i class="fas fa-clipboard-check"></i></th><th>Namn på lokal <i class="fas fa-tag"></i></th><th>Kort adress <i class="fas fa-map-pin"></i></th><th>Karta <i class="fas fa-map"></th></tr></thead><tbody>';
+
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            if ($row["Status"] == "K") {
+                echo '<tr><td class="table-success">Klar</td>';
+            } else if ($row["Status"] == "B") {
+                echo '<tr><td class="table-warning">Bokad</td>';
+            } else {
+                echo '<tr><td class="table-danger">Ej bokad</td>';
+            }
+            echo  '<td><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td>';
+
+            echo '<td>' . ($row["Adress2"] == '' ? '??' : $row["Adress2"]) . ($row["Postort"] == '' ? '' : ', ' . $row["Postort"]) . ($row["Adress1"] == '' ? '' : ' | ' . $row["Adress1"]) . '</td>';
+            echo '<td><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=' . $row["Lat"] . ',' . $row["Lng"] . '" role="button" style="margin: 5px"><i class="fas fa-caret-right"></i> Öppna karta <i class="fas fa-map"></i></a></td></tr>';
+        }
+        echo '</tbody></table>';
+    }
+
+    echo "</tbody></table>";
+    ?>
+  </div>
+</main>
+
+<?php require("includes/footer.php"); ?>
