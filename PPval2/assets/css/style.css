@@ -1,5 +1,6 @@
 header > div {
     padding-top: 40px;
+    padding-bottom: 10px;
 }
 
 footer {
@@ -7,14 +8,27 @@ footer {
 }
 
 #filter {
-    padding: 0;
+    margin-bottom: 15px;
 }
 
-#filter li {
-    display: inline;
-    margin-right: 5px;
+#filter a {
+    margin-bottom: 5px;
 }
 
 a:visited {
     color: #551a8b;
+}
+
+.breadcrumb a:visited {
+    color: #007bff;
+}
+
+a:visited.btn, a:hover.btn {
+    color: white;
+}
+
+.btn-pirate, .btn-pirate:hover {
+    background-color: #6b34a8;
+    border-color: #6b34a8;
+    color: white;
 }

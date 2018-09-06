@@ -1,15 +1,15 @@
-<?php require("print_header.php") ?>
+<?php require("includes/header.php") ?>
 
 <?php
-require("open_database.php");
+require("includes/open_database.php");
 
 //echo $kommun . ' ' . $lan . '<br>';
 
 $usql = 'SELECT *
-FROM  `vallokal`
+FROM `vallokal`
 JOIN Booking ON lokalkod = lokalid
 JOIN User ON User.userid = Booking.userid
-WHERE lankod =1 and typ="F" ORDER BY LokalKod';
+WHERE lankod=1 and typ="F" ORDER BY LokalKod';
 
 Echo '<h1>Bokade Förtidslokaler - Stockholms län</h1>';
 echo '<table border=4 style="font-size:15px;">';

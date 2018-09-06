@@ -38,7 +38,7 @@
 
 <div class="row">
   <div class="col-md-8 offset-md-2">
-    <h2>Förtidsröstningslokaler</h2>
+    <h2>Lokaler öppna förtid och valdag</h2>
 
     <?php
     $result = $conn->query('SELECT * from Kommun WHERE KommunID=' . $kommun . ' AND länID=' . $lan);
@@ -49,7 +49,7 @@
 
 <div class="row" id="filter">
   <div class="col-md-8 offset-md-2">
-    <a class="btn btn-dark" href="fget_lokaler_b.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" role="button"><i class="fas fa-caret-right"></i> Visa lokaler som är öppna förtid och valdag <i class="fas fa-filter"></i></a>
+    <a class="btn btn-info" href="fget_lokaler_f.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" role="button"><i class="fas fa-caret-right"></i> Visa endast förtidsröstningslokaler <i class="fas fa-filter"></i></a>
     <a class="btn btn-info" href="fget_lokaler_v.php?kommun=<?php echo $kommun; ?>&lan=<?php echo $lan; ?>" role="button"><i class="fas fa-caret-right"></i> Visa endast valdagens lokaler <i class="fas fa-filter"></i></a>
   </div>
 </div>
@@ -59,7 +59,7 @@
 
     <?php
     //echo $sql . '<br>';
-    $result = $conn->query("SELECT * FROM vallokal WHERE KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan). " AND Typ='F'" . " ORDER BY Typ");
+    $result = $conn->query("SELECT * FROM vallokal WHERE KommunKod=" .  htmlspecialchars($kommun) . " AND LanKod=" .  htmlspecialchars($lan) . " order by Typ");
     if ($result->num_rows > 0) {
         echo '<table class="table table-bordered table-hover">';
         echo '<thead><tr><th>Status <i class="fas fa-clipboard-check"></i></th><th>Namn på lokal <i class="fas fa-tag"></i></th><th>Kort adress <i class="fas fa-map-pin"></i></th><th>Karta <i class="fas fa-map"></th></tr></thead><tbody>';
@@ -69,7 +69,7 @@
         // output data of each row
         while($row = $result->fetch_assoc()) {
 
-            if (strpos($row["Tider"], '9/9') == false) {
+            if (strpos($row["Tider"], '9/9') !== false && count(explode(";", $row["Tider"])) > 1) {
                 $no_results = false;
 
                 if ($row["Status"] == "K") {
@@ -79,19 +79,19 @@
                 } else {
                     echo '<tr><td class="table-danger">Ej bokad</td>';
                 }
-            echo '<td><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td>';
+                echo  '<td><a href="fget_lokal.php?lokal=' . $row["LokalKod"] . '">' . $row["lokal"] . '</a></td>';
 
-            echo '<td>' . ($row["Adress2"] == '' ? '??' : $row["Adress2"]) . ($row["Postort"] == '' ? '' : ', ' . $row["Postort"]) . ($row["Adress1"] == '' ? '' : ' | ' . $row["Adress1"]) . '</td>';
-            echo '<td><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=' . $row["Lat"] . ',' . $row["Lng"] . '" role="button" style="margin: 5px"><i class="fas fa-caret-right"></i> Öppna karta <i class="fas fa-map"></i></a></td></tr>';
+                echo '<td>' . ($row["Adress2"] == '' ? '??' : $row["Adress2"]) . ($row["Postort"] == '' ? '' : ', ' . $row["Postort"]) . ($row["Adress1"] == '' ? '' : ' | ' . $row["Adress1"]) . '</td>';
+                echo '<td><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=' . $row["Lat"] . ',' . $row["Lng"] . '" role="button" style="margin: 5px"><i class="fas fa-caret-right"></i> Öppna karta <i class="fas fa-map"></i></a></td></tr>';
             }
         }
         echo '</tbody></table>';
 
         if ($no_results) {
-            echo '<div class="alert alert-warning" role="alert">Vi hittade tyvärr inga lokaler som endast är förtidsröstningslokaler. Det finns säkert lokaler som är öppna förtid och under valdagen, eller endast under valdagen. Använd filtreringsknapparna. :)</div>';
+            echo '<div class="alert alert-warning" role="alert">Vi hittade tyvärr inga lokaler som är både förtids och valdagslokaler. Det finns säkert lokaler som endast är förtidslokaler och lokaler som endast är valdagslokaler. Använd filtreringsknapparna. :)</div>';
         }
     } else {
-        echo '<div class="alert alert-warning" role="alert">Vi hittade tyvärr inga förtidsröstningslokaler i vår databas. Det finns säkert lokaler som är öppna under under valdagen. Använd filtreringsknappen för att se endast valdagslokaler. :)</div>';
+        echo '<div class="alert alert-warning" role="alert">Vi hittade tyvärr inga lokaler i vår databas. Vänligen kontakta ansvarig.</div>';
     }
 
     $conn->close();

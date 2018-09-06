@@ -1,7 +1,7 @@
-<?php require("header.php") ?>
+<?php require("includes/header.php") ?>
 
 <?php
-require("open_database.php");
+require("includes/open_database.php");
 
 //echo $kommun . ' ' . $lan . '<br>';
 $usql = 'SELECT * FROM  `User`';

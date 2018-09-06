@@ -1,6 +1,6 @@
 <?php
-require("header.php");
-require("open_database.php");
+require("includes/header.php");
+require("includes/open_database.php");
 
 $sql = 'SELECT * FROM Kommun ORDER BY Namn';
 
