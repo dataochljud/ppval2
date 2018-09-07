@@ -38,7 +38,7 @@
 
 <div class="row">
   <div class="col-md-8 offset-md-2">
-    <h2>Lokaler öppna förtid och valdag</h2>
+    <h2>Lokaler som används både som förtidsröstningslokal och valdagslokal</h2>
 
     <?php
     $result = $conn->query('SELECT * from Kommun WHERE KommunID=' . $kommun . ' AND länID=' . $lan);
