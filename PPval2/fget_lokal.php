@@ -26,7 +26,7 @@
 
         if ($row["Typ"] == "F") {
             if (strpos($row["Tider"], '9/9') !== false) {
-                echo '<li class="breadcrumb-item"><a href="fget_lokaler_b.php?kommun=' . $kommun . '&lan=' . $lan . '">' . $kommun_namn . ' (lokaler öppna både förtid och valdag)</a></li>';
+                echo '<li class="breadcrumb-item"><a href="fget_lokaler_b.php?kommun=' . $kommun . '&lan=' . $lan . '">' . $kommun_namn . ' (lokaler som används både som förtidsröstningslokal och valdagslokal)</a></li>';
             } else {
                 echo '<li class="breadcrumb-item"><a href="fget_lokaler_f.php?kommun=' . $kommun . '&lan=' . $lan . '">' . $kommun_namn . ' (endast förtidslokaler)</a></li>';
             }
