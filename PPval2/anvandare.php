@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.php">Startsida</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Lista över användare</li>
+        <li class="breadcrumb-item active" aria-current="page">Lista över användare (som deltagit)</li>
       </ol>
     </nav>
   </div>
@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col-md-8 offset-md-2">
-    <h2>Lista över användare</h2>
+    <h2>Lista över användare som deltagit</h2>
 
     <p>Här kan du se vilka som varit med och delat ut valsedlar. Tabellen är ganska stor, så man kan scrolla höger och vänster för att se all information.</p>
 
